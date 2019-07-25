@@ -1,6 +1,7 @@
 // Domain Grabber - Custom sub-domain finder for Pentesting recon.
 // @author James Rogers
 
+import dotenv from 'dotenv';
 import axios from 'axios';
 import fse from 'fs-extra';
 import ora from 'ora';
@@ -9,31 +10,42 @@ import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
 import WebCapture from 'webpage-capture';
 import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+
+// ENV Setup
+dotenv.config();
 
 // Express Init
 const app = express();
+app.use(bodyParser.json());
 
-async function run() {
-    let response = await prompts({
-        type: 'text',
-        name: 'domain',
-        message: 'Enter Domain: '
-    });
+// Set CORS
+// app.use(cors);
 
-    const spinner = ora(`Finding sub-domains for - ${response.domain}`).start();
+// ROOT - Forbidden
+app.get('/', (req, res) => res.json({'status': 'Forbidden entry'}));
+
+app.get('/domain', async (req, res) => {
+    const data = await run(req.body);
+    res.send(data);
+});
+
+async function run(query) {
+    const spinner = ora(`Finding sub-domains for - ${query.domain}`).start();
 
     // Make requests to crt.sh and certspotter
-    const resp = await axios(`https://crt.sh/?q=%.${response.domain}`);
+    const resp = await axios(`https://crt.sh/?q=%.${query.domain}`);
 
     // Create Directory for domain screenshots
     try {   
-        await fse.mkdir(`./screenshots/${response.domain}`);
+        await fse.mkdir(`./screenshots/${query.domain}`);
     } catch (err) {
         console.error(err);
     }
 
     const capturer = new WebCapture({
-        outputDir: `./screenshots/${response.domain}`
+        outputDir: `./screenshots/${query.domain}`
     });
     
     const dom = new JSDOM(resp.data);
@@ -76,4 +88,9 @@ async function run() {
     // console.log('');
     // console.log(crtSH.join('\r\n'));
 }
-run();
+
+// Start App Listen on Port 5000 set in .env
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+    console.log(`Started on port http://localhost:${PORT}`);
+});
