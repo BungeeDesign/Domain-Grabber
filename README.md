@@ -8,6 +8,9 @@ ___
 
 ## Automated Pentesting tool for sub-domain recon.
 
+https://domain.grabber.live
+
+
 ### Overview
 
 #### Domain grabber uses crt.sh & certspotter to grab sub-domains for any given domain. All results can be viewed and then further testing on, domain grabber will look for repeated sub-domains at the first level and then pass subsequent sub-domains to find even more. 
