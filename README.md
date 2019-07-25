@@ -2,9 +2,9 @@
 
 ___
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![](https://img.shields.io/badge/build-passing-brightgreen)
-![](https://img.shields.io/badge/version-1.0.0-blue)
+![](https://img.shields.io/badge/license-MIT-blueviolet)
+![](https://img.shields.io/badge/build-passing-blueviolet)
+![](https://img.shields.io/badge/version-1.0.0-blueviolet)
 
 ## Automated Pentesting tool for sub-domain recon.
 
