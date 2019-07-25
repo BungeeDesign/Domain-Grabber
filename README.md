@@ -1,4 +1,4 @@
-<img src="assets/logo.svg" width="300">
+<img src="assets/logo.png" width="300">
 
 ___
 
@@ -8,12 +8,12 @@ ___
 
 ## Automated Pentesting tool for sub-domain recon.
 
-#### Overview
+### Overview
 
-### Domain grabber uses crt.sh & certspotter to grab sub-domains for any given domain. All results can be viewed and then further testing on, domain grabber will look for repeated sub-domains at the first level and then pass subsequent sub-domains to find even more. 
+#### Domain grabber uses crt.sh & certspotter to grab sub-domains for any given domain. All results can be viewed and then further testing on, domain grabber will look for repeated sub-domains at the first level and then pass subsequent sub-domains to find even more. 
 
-#### Automation
+### Automation
 
-### Domain Grabber also has built-in screenshotting after domain analysis. It will automaticlly screenshot found and probed domains webpages. Domain Grabber provides a nice web UI allowing you to easily manage your sub-domain recon efforts.
+#### Domain Grabber also has built-in screenshotting after domain analysis. It will automaticlly screenshot found and probed domains webpages. Domain Grabber provides a nice web UI allowing you to easily manage your sub-domain recon efforts.
 
 > Designed & Developed by BungeeDesign.com (James Rogers) 😛
