@@ -1,4 +1,4 @@
-<img src="assets/logo.png" width="300">
+<img src="https://i.ibb.co/SKsDy4y/Logo.png" width="300">
 
 ___
 
