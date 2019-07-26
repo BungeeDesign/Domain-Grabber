@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 import axios from 'axios';
 import fse from 'fs-extra';
 import ora from 'ora';
-import prompts from 'prompts';
 import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
 import WebCapture from 'webpage-capture';
@@ -20,12 +19,10 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 
-// Set CORS
-// app.use(cors);
-
-// ROOT - Forbidden
+// Root - Forbidden
 app.get('/', (req, res) => res.json({'status': 'Forbidden entry'}));
 
+// Domain - Query given domain
 app.get('/domain', async (req, res) => {
     const data = await run(req.body);
     res.send(data);
@@ -66,27 +63,21 @@ async function run(query) {
     console.log('\r\n');
     console.log(`CRT.SH Found: ${crtSH.length} domains!`);
 
-    let actionMenu = await prompts({
-        type: 'text',
-        name: 'action',
-        message: 'Action Menu: - P (Probe Domains) S (Screenshot All Domains) PS (Probe then Screenshot)'
-    });
-
-    if (actionMenu.action === 'P') {
-        spinner.start('Probing Domains...');
-    } else if (actionMenu.action === 'S') {
+    if (query.action === 'list') {
+        let domainList = {
+            'domains': crtshDomainsHTTPS
+        }
+        return domainList;
+    } else if (query.action === 'S') {
         spinner.start('Screenshotting Domains...');
         console.log(__dirname + '/images');
         const res = await capturer.capture(crtshDomainsHTTPS);
         console.log(res);
-    } else if (actionMenu.action === 'PS') {
+    } else if (query.action === 'PS') {
         spinner.start('Probing & Screenshotting All Domains...');        
     } else {
         spinner.fail('Please enter a valid option: P S PS');
     }
-
-    // console.log('');
-    // console.log(crtSH.join('\r\n'));
 }
 
 // Start App Listen on Port 5000 set in .env

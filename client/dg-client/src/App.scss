@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed&display=swap');
+
+// Theme Colours
+$primaryColor: #5E00F2;
+$secondaryColor: rgb(255, 255, 255);
+
+// Fonts
+$primaryFont: 'Fira Sans Extra Condensed', sans-serif;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
+  background-color: $secondaryColor;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 6%;
+
+  input {
+    outline: none;
+    border: none;
+    background: $primaryColor;
+    color: white;
+    padding: 10px;
+    font-size: 1.6em;
+    border-radius: 5px;
+  }
+}
