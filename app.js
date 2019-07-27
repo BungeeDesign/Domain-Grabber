@@ -52,6 +52,7 @@ async function run(query) {
 
     let crtSH = [];
     let crtshDomainsHTTPS = [];
+    let aliveDomains = [];
 
     domains.forEach((domain) => {
         crtSH.push(domain.innerHTML);
@@ -76,8 +77,21 @@ async function run(query) {
         console.log(__dirname + '/images');
         const res = await capturer.capture(crtshDomainsHTTPS);
         console.log(res);
-    } else if (query.action === 'PS') {
-        spinner.start('Probing & Screenshotting All Domains...');        
+    } else if (query.probe) {
+        spinner.start('Probing All Domains...');
+        crtshDomainsHTTPS.forEach(async (domain) => {
+            const req = await axios(domain);
+            if (req.statusCode == 200 || req.statusCode == 201) {
+                aliveDomains.push(domain);
+            }
+        });
+
+        let domainList = {
+            'domains': aliveDomains,
+            'domainName': query.domain
+        }
+
+        return domainList;
     } else {
         spinner.fail('Please enter a valid option: P S PS');
     }

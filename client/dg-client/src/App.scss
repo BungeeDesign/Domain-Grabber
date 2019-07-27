@@ -49,7 +49,7 @@ header {
     border: none;
     background: $primaryColor;
     color: $secondaryColor;
-    font-family: $primaryFont;
+    font-family: $secondaryFont;
     padding: 10px;
     font-size: 1.6em;
     border-radius: 5px;
@@ -67,7 +67,7 @@ header {
     border: none;
     background: $primaryColor;
     color: $secondaryColor;
-    font-family: $primaryFont;
+    font-family: $secondaryFont;
     padding: 10px;
     font-size: 1.6em;
     border-radius: 5px;
@@ -113,7 +113,7 @@ header {
   width: 100%;
   max-width: 800px;
   height: auto;
-  color: #38028f;;
+  color: rgba(255, 255, 255, 0.42);
   font-family: $secondaryFont;
   padding: 20px;
   border-radius: 5px;
