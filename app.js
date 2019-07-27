@@ -12,18 +12,20 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
+
 // ENV Setup
 dotenv.config();
 
 // Express Init
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 
 // Root - Forbidden
 app.get('/', (req, res) => res.json({'status': 'Forbidden entry'}));
 
 // Domain - Query given domain
-app.get('/domain', async (req, res) => {
+app.post('/domain', async (req, res) => {
     const data = await run(req.body);
     res.send(data);
 });
@@ -65,7 +67,8 @@ async function run(query) {
 
     if (query.action === 'list') {
         let domainList = {
-            'domains': crtshDomainsHTTPS
+            'domains': crtSH,
+            'domainName': query.domain
         }
         return domainList;
     } else if (query.action === 'S') {

@@ -8,7 +8,8 @@ import {
         case SEARCH_DOMAINS:
           return {
             ...state,
-            domains: action.payload,
+            domains: action.payload.domains,
+            domainName: action.payload.domainName,
             loading: false
           };
         case SET_LOADING:

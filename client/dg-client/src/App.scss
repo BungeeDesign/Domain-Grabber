@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 // Theme Colours
 $primaryColor: #5E00F2;
@@ -6,6 +7,8 @@ $secondaryColor: rgb(255, 255, 255);
 
 // Fonts
 $primaryFont: 'Fira Sans Extra Condensed', sans-serif;
+$secondaryFont: 'Montserrat', sans-serif;
+
 
 * {
   box-sizing: border-box;
@@ -17,8 +20,12 @@ a {
   text-decoration: none;
 }
 
-h1, h2, h3 {
+h1, h2 {
   color: $primaryColor;
+}
+
+h3 {
+  color: white;
 }
 
 body {
@@ -76,9 +83,9 @@ header {
 
 // Loader
 .loader-container {
-  position: absolute;
   display: flex;
   justify-content: center;
+  margin-top: 200px;
 }
 
 .loader-circle {
@@ -90,9 +97,29 @@ header {
   transform: scale(0);
 }
 
+// Results Gird
 .domain-results {
-  display: flex;
-  justify-content: center;
-  margin-top: 200px;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 1rem;
+  justify-items: center;
+  margin-top: 150px;
+  margin-bottom: 30px;
 }
 
+// Domain Item
+.domain-item {
+  background-color: $primaryColor;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  color: #38028f;;
+  font-family: $secondaryFont;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.sb-highlight {
+  color: white;
+  display: inline;
+}

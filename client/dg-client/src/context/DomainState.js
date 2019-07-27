@@ -10,6 +10,7 @@ import {
 const DomainState = props => {
   const initialState = {
     domains: [],
+    domainName: '',
     loading: false
   };
 
@@ -18,12 +19,12 @@ const DomainState = props => {
   // Search Users
   const searchDomains = async data => {
     setLoading();
-
-    const res = await axios.get(`https://localhost:8000/domain`, data);
+    console.log(data);
+    const res = await axios.post('http://localhost:8000/domain', data);
 
     dispatch({
       type: SEARCH_DOMAINS,
-      payload: res.data.items
+      payload: res.data
     });
   };
 
@@ -34,6 +35,7 @@ const DomainState = props => {
     <DomainContext.Provider
       value={{
         domains: state.domains,
+        domainName: state.domainName,
         loading: state.loading,
         searchDomains
       }}
