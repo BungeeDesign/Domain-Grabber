@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/Logo.svg';
 
-const Header = props => {
+const Header = () => {
     return (
         <div>
             <header>

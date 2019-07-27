@@ -1,0 +1,2 @@
+export const SEARCH_DOMAINS = 'SEARCH_DOMAINS';
+export const SET_LOADING = 'SET_LOADING';

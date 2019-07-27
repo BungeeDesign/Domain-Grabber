@@ -17,6 +17,10 @@ a {
   text-decoration: none;
 }
 
+h1, h2, h3 {
+  color: $primaryColor;
+}
+
 body {
   font-family: 'Fira Sans Extra Condensed', sans-serif;
   background-color: $secondaryColor;
@@ -25,21 +29,70 @@ body {
 header {
   display: flex;
   justify-content: center;
-  margin-top: 5%;
+  margin-top: 90px;
 }
 
 .search-container {
   display: flex;
   justify-content: center;
-  margin-top: 6%;
+  margin-top: 90px;
 
   input {
     outline: none;
     border: none;
     background: $primaryColor;
-    color: white;
+    color: $secondaryColor;
+    font-family: $primaryFont;
     padding: 10px;
     font-size: 1.6em;
     border-radius: 5px;
+    box-shadow: 0 3px 14px #5e00f282;
+    text-align: center;
+    &::placeholder {
+      color: #ffffff7a;
+    } 
+  }
+
+  button {
+    cursor: pointer;
+    margin-left: 25px;
+    outline: none;
+    border: none;
+    background: $primaryColor;
+    color: $secondaryColor;
+    font-family: $primaryFont;
+    padding: 10px;
+    font-size: 1.6em;
+    border-radius: 5px;
+    box-shadow: 0 3px 14px #5e00f282;
+    text-align: center;
+
+    &:hover {
+      background: #38028f;
+      color: #ffffff;
+    }
   }
 }
+
+// Loader
+.loader-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
+.loader-circle {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  background: #38028f;
+  border-radius: 1000px;
+  transform: scale(0);
+}
+
+.domain-results {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
+
