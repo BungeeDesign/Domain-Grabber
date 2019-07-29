@@ -1,6 +1,8 @@
 // Domain Grabber - Custom sub-domain finder for Pentesting recon.
 // @author James Rogers
 
+'use strict';
+
 import dotenv from 'dotenv';
 import axios from 'axios';
 import fse from 'fs-extra';
@@ -26,6 +28,7 @@ app.get('/', (req, res) => res.json({'status': 'Forbidden entry'}));
 
 // Domain - Query given domain
 app.post('/domain', async (req, res) => {
+    req.setTimeout(7 * 60 * 1000);
     const data = await run(req.body);
     res.send(data);
 });
@@ -52,7 +55,6 @@ async function run(query) {
 
     let crtSH = [];
     let crtshDomainsHTTPS = [];
-    let aliveDomains = [];
 
     domains.forEach((domain) => {
         crtSH.push(domain.innerHTML);
@@ -66,35 +68,50 @@ async function run(query) {
     console.log('\r\n');
     console.log(`CRT.SH Found: ${crtSH.length} domains!`);
 
-    if (query.action === 'list') {
+    if (query.action === 'list' && query.probe === false) {
         let domainList = {
             'domains': crtSH,
             'domainName': query.domain
         }
         return domainList;
-    } else if (query.action === 'S') {
+    }
+    
+    if (query.action === 'S') {
         spinner.start('Screenshotting Domains...');
         console.log(__dirname + '/images');
         const res = await capturer.capture(crtshDomainsHTTPS);
         console.log(res);
-    } else if (query.probe) {
+    }
+    
+    if (query.probe === true) {
         spinner.start('Probing All Domains...');
-        crtshDomainsHTTPS.forEach(async (domain) => {
-            const req = await axios(domain);
-            if (req.statusCode == 200 || req.statusCode == 201) {
-                aliveDomains.push(domain);
-            }
-        });
+
+        const probedDomains = await probeDomains(crtshDomainsHTTPS);
 
         let domainList = {
-            'domains': aliveDomains,
+            'domains': probedDomains,
             'domainName': query.domain
         }
 
         return domainList;
-    } else {
-        spinner.fail('Please enter a valid option: P S PS');
     }
+}
+
+async function probeDomains(domains) {
+    let probedDomains = [];
+    for (let i = 0; i < domains.length; i++) {
+        try {            
+            const res = await axios(domains[i], { validateStatus: false }, { timeout: 2 });
+            if (res.status == 200) {
+                probedDomains.push(domains[i].replace('https://', ''));
+            }
+            console.log(res.status);
+        } catch (error) {
+            console.log('Error');
+        }
+    }
+    console.log('Finished....');
+    return probedDomains;
 }
 
 // Start App Listen on Port 5000 set in .env

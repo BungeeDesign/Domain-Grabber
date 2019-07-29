@@ -20,7 +20,7 @@ const DomainState = props => {
   const searchDomains = async data => {
     setLoading();
     console.log(data);
-    const res = await axios.post('http://localhost:8000/domain', data);
+    const res = await axios.post('http://localhost:8000/domain', data, {timeout: 690000});
 
     dispatch({
       type: SEARCH_DOMAINS,

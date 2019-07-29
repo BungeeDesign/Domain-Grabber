@@ -8,10 +8,13 @@ const Search = () => {
     let { loading, domains, domainName } = domainContext;
     console.log(domains);
 
+    const domainCount = domains.length;
+
     if (loading) return <Loader />;
 
     return (
         <div className="domain-results">
+            {domainCount > 0 && <div className="domain-count">Found: {domainCount} Domains!</div>}
           {domains.map(domain => (
             <DomainItem key={domain.id} domain={domain} domainName={domainName} />
           ))}

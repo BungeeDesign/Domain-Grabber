@@ -21,7 +21,7 @@ const Search = () => {
             "level": "1",
             "screenshot": "false",
             "analysis": "true",
-            "probe": "true",
+            "probe": true,
             "action": "list"
         });
     };
