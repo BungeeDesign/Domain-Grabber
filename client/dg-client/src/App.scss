@@ -42,7 +42,11 @@ header {
 .search-container {
   display: flex;
   justify-content: center;
+  flex-flow: column;
   margin-top: 90px;
+  width: 450px;
+  margin-left: auto;
+  margin-right: auto;
 
   input {
     outline: none;
@@ -62,7 +66,6 @@ header {
 
   button {
     cursor: pointer;
-    margin-left: 25px;
     outline: none;
     border: none;
     background: $primaryColor;
@@ -109,6 +112,7 @@ header {
 
 // Domain Item
 .domain-item {
+  opacity: 0;
   background-color: $primaryColor;
   width: 100%;
   max-width: 800px;
@@ -117,6 +121,22 @@ header {
   font-family: $secondaryFont;
   padding: 20px;
   border-radius: 5px;
+
+  @for $i from 1 through 400 {
+    &:nth-child( #{$i} ) {
+     animation: resultsIn .75s #{$i * 0.25}s ease 1 forwards; 
+    }
+  }
+
+  @keyframes resultsIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
 }
 
 .sb-highlight {
@@ -128,4 +148,67 @@ header {
   font-family: "Montserrat", sans-serif;
   font-size: 2em;
   color: #5e00f2;
+}
+
+.search-settings {
+  width: auto;
+  height: 200px;
+  margin: 20px 0px 20px 0px;
+}
+
+// Toggle
+.toggle {
+  display: grid;
+  grid-template-columns: auto 100px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.toggle-container {
+  background-color: #848484;
+  width: 70px;
+  height: 40px;
+  border-radius: 1000px;
+  justify-self: center;
+}
+
+.container-toggled {
+  background-color: $primaryColor;
+}
+
+.toggle-button {
+    width: 25px;
+    height: 25px;
+    background: white;
+    border-radius: 1000px;
+    margin-top: 7px;
+    margin-left: 7px;
+    position: absolute;
+    box-shadow: 0 0 13px #0f0029a1;
+    cursor: pointer;
+    transition: .4s ease;
+}
+
+.toggle-label {
+  font-family: $primaryFont;
+  font-size: 1.3em;
+  color: $primaryColor;
+}
+
+.toggled {
+  transform: translateX(31px);
+  animation: gooSwitch .3s ease;
+  @keyframes gooSwitch {
+    0% {
+      width: 25px;
+    }
+
+    50% {
+      width: 35px;
+    }
+
+    100% {
+      width: 25px;
+    }
+  }
 }

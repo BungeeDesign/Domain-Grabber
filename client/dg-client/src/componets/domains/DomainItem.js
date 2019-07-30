@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-// import PropTypes from 'prop-types';
-import DomainHighlighter from './DomainHighlighter'
+import PropTypes from 'prop-types';
+import DomainHighlighter from './DomainHighlighter';
 
 const DomainItem = ({domain, domainName}) => {
     let replacedDomain = domain.replace(domainName, '');

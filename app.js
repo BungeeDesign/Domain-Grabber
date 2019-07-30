@@ -29,7 +29,7 @@ app.get('/', (req, res) => res.json({'status': 'Forbidden entry'}));
 // Domain - Query given domain
 app.post('/domain', async (req, res) => {
     req.setTimeout(7 * 60 * 1000);
-    const data = await run(req.body);
+    const data = await run(req.body[0]);
     res.send(data);
 });
 
@@ -56,8 +56,9 @@ async function run(query) {
     let crtSH = [];
     let crtshDomainsHTTPS = [];
 
+    let i = 0;
     domains.forEach((domain) => {
-        crtSH.push(domain.innerHTML);
+        crtSH.push({key: i++, domain: domain.innerHTML});
     });
 
     crtSH.forEach((domain) => {
