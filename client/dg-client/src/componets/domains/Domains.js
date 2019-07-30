@@ -15,7 +15,7 @@ const Search = () => {
         <div className="domain-results">
           {domainCount > 0 && <div className="domain-count">Found: {domainCount} Domains!</div>}
                 {domains.map(domain => (
-                      <DomainItem key={domain.key} domain={domain.domain} domainName={domainName} />
+                  <DomainItem key={domain.key} domain={domain.domain} domainName={domainName} />
                 ))}
         </div>
     );
