@@ -14,7 +14,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-
 // ENV Setup
 dotenv.config();
 
@@ -61,8 +60,9 @@ async function run(query) {
         crtSH.push({key: i++, domain: domain.innerHTML});
     });
 
+    let j = 0;
     crtSH.forEach((domain) => {
-        crtshDomainsHTTPS.push(`https://${domain}`);
+        crtshDomainsHTTPS.push({ key: j++, domain: `https://${domain.domain}`});
     });
 
     spinner.stop();
@@ -100,17 +100,18 @@ async function run(query) {
 
 async function probeDomains(domains) {
     let probedDomains = [];
-    for (let i = 0; i < domains.length; i++) {
+    let k = 0;
+    for (const domain of domains) {
         try {            
-            const res = await axios(domains[i], { validateStatus: false }, { timeout: 2 });
+            const res = await axios(domain.domain, { validateStatus: false }, { timeout: 2 });
             if (res.status == 200) {
-                probedDomains.push(domains[i].replace('https://', ''));
+                probedDomains.push({key: k++, domain: domain.domain.replace('https://', '')});
             }
             console.log(res.status);
         } catch (error) {
             console.log('Error');
         }
-    }
+    };
     console.log('Finished....');
     return probedDomains;
 }
