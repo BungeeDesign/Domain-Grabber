@@ -72,7 +72,8 @@ async function run(query) {
     if (query.action === 'list' && query.probe === false) {
         let domainList = {
             'domains': crtSH,
-            'domainName': query.domain
+            'domainName': query.domain,
+            'noResults': crtSH.length == 0 ? true : false
         }
         return domainList;
     }

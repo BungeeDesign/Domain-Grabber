@@ -11,6 +11,7 @@ const DomainState = props => {
   const initialState = {
     domains: [],
     domainName: '',
+    noResults: false,
     loading: false
   };
 
@@ -36,6 +37,7 @@ const DomainState = props => {
       value={{
         domains: state.domains,
         domainName: state.domainName,
+        noResults: state.noResults,
         loading: state.loading,
         searchDomains
       }}

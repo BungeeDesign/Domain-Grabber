@@ -10,6 +10,7 @@ import {
             ...state,
             domains: action.payload.domains,
             domainName: action.payload.domainName,
+            noResults: action.payload.noResults,
             loading: false
           };
         case SET_LOADING:
