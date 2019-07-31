@@ -1,17 +1,36 @@
-import React, { useState, useContext, Fragment } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import DomainContext from '../../context/domainContext';
 import Toggle from './Toggle';
+import Alert from './Alert';
 
 const Search = () => {
+    // Mouted or Updated
+    useEffect(() => {
+        if (alert.showAlert) {
+            setTimeout(() => {
+                const tempAlert = [...alert];
+                tempAlert.showAlert = false;
+                tempAlert.message = '';
+                setAlert(tempAlert);
+            }, 4000)
+        }
+    });
+
     const domainContext = useContext(DomainContext);
 
     const [data, setData] = useState([{
-        "domain": null,
+        "domain": '',
         "level": "1",
         "screenshot": false,
         "analysis": false,
         "probe": false,
         "action": "list"
+    }]);
+
+    // Alert State
+    const [alert, setAlert] = useState([{
+        showAlert: false,
+        message: ''
     }]);
 
     // Toggle Settings
@@ -31,9 +50,19 @@ const Search = () => {
 
     // Submit Search
     const onClick = () => {
-        if (data === '') {
-            console.log('Cannot be empty');
+        if (data[0].domain === '') {
+            console.log('EMpty');
+            const tempAlert = [...alert];
+            tempAlert.showAlert = true;
+            tempAlert.message = 'Please enter a domain to search.';
+            setAlert(tempAlert);
         } else {
+            if (data[0].screenshot) {
+                const tempAlert = [...alert];
+                tempAlert.showAlert = true;
+                tempAlert.message = 'Screenshots may take a long time.';
+                setAlert(tempAlert);
+            }
             domainContext.searchDomains(data);
         }
     };
@@ -74,6 +103,7 @@ const Search = () => {
                 ))}
             </div>
             <button onClick={onClick}>Grab</button>
+            <Alert showAlert={alert.showAlert} message={alert.message} />
         </div>
     );
 };

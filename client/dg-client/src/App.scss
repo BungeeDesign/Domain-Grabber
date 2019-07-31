@@ -190,7 +190,7 @@ header {
 }
 
 .toggle-label {
-  font-family: $primaryFont;
+  font-family: $secondaryFont;
   font-size: 1.3em;
   color: $primaryColor;
 }
@@ -212,3 +212,20 @@ header {
     }
   }
 }
+
+// Alert Component 
+.alert-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  padding: 20px;
+  background: $primaryColor;
+  h3 {
+    color: white;
+  }
+  margin-top: 20px;
+  border-radius: 5px;
+  font-family: $secondaryFont;
+  text-align: center;
+}
+
+

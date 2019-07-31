@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DomainHighlighter from './DomainHighlighter';
-import Zoom from 'react-reveal/Zoom';
+import Fade from 'react-reveal/Fade';
 
 const DomainItem = ({domain, domainName}) => {
     let replacedDomain = domain.replace(domainName, '');
@@ -12,14 +12,14 @@ const DomainItem = ({domain, domainName}) => {
 
     return (
         <>
-            <Zoom>
+            <Fade bottom>
             <div className='domain-item'>
                 <div className='domain-name'>
                 {subDomains.map(subDomain => (<DomainHighlighter key={subDomain.id} subDomain={subDomain} />))}
                 .{domainName}
                 </div>
             </div>
-            </Zoom>
+            </Fade>
         </>
     );
 };
