@@ -96,10 +96,10 @@ const Search = () => {
 
     return (
         <div className="search-container">
-            <input type="text" placeholder="Google.com" onChange={onChange}/>
+            <input type="text" placeholder="&#xF002;" onChange={onChange}/>
             <div className="search-settings">
                 {toggles.map((toggle, i) => (
-                    <Toggle toggleLabel={toggle.label} toggle={toggle.toggled} handleToggle={() => onToggle(i)}/>
+                    <Toggle key={i} toggleLabel={toggle.label} toggle={toggle.toggled} handleToggle={() => onToggle(i)}/>
                 ))}
             </div>
             <button onClick={onClick}>Grab</button>

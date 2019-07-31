@@ -58,9 +58,10 @@ header {
     font-size: 1.6em;
     border-radius: 5px;
     box-shadow: 0 3px 14px #5e00f282;
-    text-align: center;
+    text-align: left;
     &::placeholder {
-      color: #ffffff7a;
+      color: white;
+      font-family: 'FontAwesome';
     } 
   }
 
@@ -68,7 +69,7 @@ header {
     cursor: pointer;
     outline: none;
     border: none;
-    background: $primaryColor;
+    background: linear-gradient(45deg, #5e00f2, #873bff);
     color: $secondaryColor;
     font-family: $secondaryFont;
     padding: 10px;

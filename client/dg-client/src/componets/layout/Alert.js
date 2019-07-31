@@ -14,7 +14,7 @@ const Alert = ({showAlert, message}) => {
         item && 
         <animated.div key={key} style={props}>
         <div className="alert-container">
-            <h3>🚧 {message}</h3>
+            <h3><span role="img" aria-label="alert">🚨</span> {message}</h3>
         </div>
         </animated.div>
         

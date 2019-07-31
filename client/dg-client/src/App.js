@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import './App.scss';
 import Header from './componets/layout/Header';
 import Search from './componets/layout/Search';
