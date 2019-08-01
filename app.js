@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 
 // GCS Firebase Storage Init
 admin.initializeApp({
-    credential: admin.credential.cert('./domain-grabber-1b1c758f465e.json'),
+    credential: admin.credential.cert('./firebase-admin-cred/domain-grabber-307840b47ecd.json'),
     storageBucket: 'domain-grabber.appspot.com'
 });
 
