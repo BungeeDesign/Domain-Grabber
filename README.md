@@ -19,13 +19,13 @@ https://domain.grabber.live
 
 #### Domain Grabber also has built-in screenshotting after domain analysis. It will automaticlly screenshot found and probed domains webpages. Domain Grabber provides a nice web UI allowing you to easily manage your sub-domain recon efforts.
 
-### ToDo
+### To Do
 
 - [x] Take screenshots
 - [x] Domain Probe
 - [ ] Domain Analysis
 - [ ] Multiple Domain Levels
-- [ ] Technoliges Detection
+- [ ] Technologies Detection
 - [ ] Direct Link
 - [ ] Certspotter Support
 - [ ] Notification via ContextAPI
