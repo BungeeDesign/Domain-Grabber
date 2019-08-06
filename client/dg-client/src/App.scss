@@ -247,5 +247,7 @@ header {
 
 // Screenshots
 .domain-screenshots {
-  width: 400px;
+  width: 100%;
+  display: flex;
+  margin-top: 10px;
 }

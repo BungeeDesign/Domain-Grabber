@@ -94,7 +94,8 @@ async function run(query) {
         let domainList = {
             'domains': crtSH,
             'domainName': query.domain,
-            'noResults': crtSH.length == 0 ? true : false
+            'noResults': crtSH.length == 0 ? true : false,
+            'screenshots': false
         }
         if (query.screenshot) {
             spinner.start('Screenshotting Domains...');
@@ -106,7 +107,7 @@ async function run(query) {
             }
 
             // Upload Screenshots
-            const uploadedScreenshots = uploadScreenshots(paths);
+            const uploadedScreenshots = await uploadScreenshots(paths);
 
             for (let i = 0; i < crtSH.length; i++) {
                 crtSH[i].screenshot = getScreenShots(i);
@@ -114,7 +115,7 @@ async function run(query) {
             
             function getScreenShots(i) {
                 if (i >= uploadedScreenshots.length) {
-                    return 'offline.png';
+                    return false;
                 }
                 return uploadedScreenshots[i];
             }
@@ -122,7 +123,8 @@ async function run(query) {
             domainList = {
                 'domains': crtSH,
                 'domainName': query.domain,
-                'noResults': crtSH.length == 0 ? true : false
+                'noResults': crtSH.length == 0 ? true : false,
+                'screenshots': true
             }
         } else {
             return domainList;
@@ -139,7 +141,9 @@ async function run(query) {
 
         let domainList = {
             'domains': probedDomains,
-            'domainName': query.domain
+            'domainName': query.domain,
+            'noResults': crtSH.length == 0 ? true : false,
+            'screenshots': false
         }
 
         return domainList;
@@ -166,17 +170,20 @@ async function probeDomains(domains) {
     return probedDomains;
 }
 
-function uploadScreenshots(paths) {
-    // console.log('UPLOAD SCREENSHOT', paths);
-    paths.forEach(async pathName => {
-        // Format Windows path 
-        let pathFormatted = path.resolve(pathName);
-        bucket.upload(pathFormatted);
-        const fileName = path.basename(pathFormatted);
-        screenshotURLs.push(`https://storage.googleapis.com/domain-grabber.appspot.com/${fileName}`);
-    });
-    // console.log('RETURN SCREENSHIT', screenshotURLs);
-    return screenshotURLs;
+async function uploadScreenshots(paths) {
+        for (const pathName of paths) {
+            // Format Windows path 
+            if (pathName != null) {
+                let pathFormatted = path.resolve(pathName);
+                await bucket.upload(pathFormatted);
+                console.log('Uploaded ...')
+                const fileName = path.basename(pathFormatted);
+                screenshotURLs.push(`https://storage.googleapis.com/domain-grabber.appspot.com/${fileName}`);
+            }
+        };
+
+        // Once images are uploaded
+        return screenshotURLs;
 }
 
 // Start App Listen on Port 5000 set in .env

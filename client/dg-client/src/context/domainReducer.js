@@ -11,6 +11,7 @@ import {
             domains: action.payload.domains,
             domainName: action.payload.domainName,
             noResults: action.payload.noResults,
+            screenshots: action.payload.screenshots,
             loading: false
           };
         case SET_LOADING:

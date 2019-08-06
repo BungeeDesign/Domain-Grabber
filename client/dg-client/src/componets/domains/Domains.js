@@ -5,7 +5,7 @@ import DomainContext from '../../context/domainContext';
 
 const Domains = () => {
     const domainContext = useContext(DomainContext);
-    let { loading, domains, domainName, noResults } = domainContext;
+    let { loading, domains, domainName, noResults, screenshots } = domainContext;
     
     const domainCount = domains.length;
 
@@ -16,7 +16,7 @@ const Domains = () => {
           {noResults === true && <div className="domain-count">No results for: {domainName}</div>}
           {domainCount > 0 && <div className="domain-count">Found: {domainCount} Domains!</div>}
                 {domains.map(domain => (
-                  <DomainItem key={domain.key} domain={domain.domain} screenshot={domain.screenshot} domainName={domainName} />
+                  <DomainItem key={domain.key} domain={domain.domain} screenshots={screenshots} screenshot={domain.screenshot} domainName={domainName} />
                 ))}
         </div>
     );
